@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>阪井啓紀_ホームページ</title>
+<title>MEcholocation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="ここにサイト説明を入れます">
 <link rel="stylesheet" href="css/style.css">
@@ -14,11 +14,11 @@
 
 <header>
 
-<h1 id="logo"><a href="/index.html"><img src="images/sakahiro_logo.png" alt=""></a></h1>
+<h1 id="logo"><a href="/index.html"><img src="images/MEcholocationロゴ.png" alt=""></a></h1>
 
 <nav>
 <ul id="menubar">
-<li><a href="/research.html">Research</a></li>
+<li><a href="#about">About</a></li>
 <li><a href="#gallery">Activity</a></li>
 <li><a href="#link">Link</a></li>
 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -31,51 +31,28 @@
 
 <div class="contents bg1">
 
-<section>
-
-<h2>自己紹介</h2>
-
-<h3>阪井啓紀</h3>
-<p>岐阜大学院 自然科学技術研究科知能理工学専攻 加藤研究室所属</p>
-<dl id="new">
-<dt>2019年4月</dt>
-<dd>岐阜大学 工学部 電気電子・情報工学科 入学</dd>
-<dt>2023年3月</dt>
-<dd>岐阜大学 工学部 電気電子・情報工学科 卒業</dd>
-<dt>2023年4月</dt>
-<dd>岐阜大学院 自然科学技術研究科知能理工学専攻 入学</dd>
-</dl>
-</dl>
-<p><strong class="color-theme">模倣学習による自律走行について研究</strong><br>
-カメラ画像による移動ロボットの自律走行を実現</p>
-<p><strong class="color-theme">感覚的なVRコンテンツの製作</strong><br>
-歩き回れる、物に触れるなど現実とのインタラクションを重視した作品を製作
-<ul>
-<li>MEcholocation</li>
-<li>IVRC2023に向けて現在作品を製作中!</li>
-</ul>
-</p>
-
-</section>
 
 <section>
+
+<h2>作品紹介</h2>
+
 
 <h2>NEWS</h2>
 
 <dl id="new">
-<dt>2022/02/10<span>発表</span></dt>
-<dd>VR作品「MEcholocation」が、Laval Virtual 2022 ReVolution #Researchへの参加が採択されました。
-<dt>2022/01/18<span>取材</span></dt>
+<dt>2023/02/10<span>発表</span></dt>
+<dd>Laval Virtual 2022 ReVolution #Researchへの参加が採択されました。
+<dt>2023/01/18<span>取材</span></dt>
 <dd><a href="https://note.com/unityjapan/n/n11dbbdebaf82" target="_blank">Unity Japan様の取材記事</a>が公開されました。
 <dt>2022/12/22<span>発表</span></dt>
-<dd>XRkaigi 2022にて，VR作品「MEcholocation」を出展しました。</dd>
+<dd>XRkaigi 2022に出展しました。</dd>
 <dt>2022/11/04<span>受賞</span></dt>
-<dd>Interverse Virtual Reality Challenge (IVRC) 2022 LEAP stageにて，VR作品「MEcholocation」が「川上記念賞」を受賞しました。同時にXRkaigiへの招待展示が決定しました。</dd>
+<dd>Interverse Virtual Reality Challenge (IVRC) 2022 LEAP stageにて，「川上記念賞」を受賞しました。同時にXRkaigiへの招待展示が決定しました。</dd>
 <dt>2022/09/26<span>取材</span></dt>
-<dd>VR作品「MEcholocation」が、<a href="https://www.itmedia.co.jp/news/articles/2209/26/news049.html" target="_blank">ITMedia様の記事</a>にて紹介されました。
+<dd><a href="https://www.itmedia.co.jp/news/articles/2209/26/news049.html" target="_blank">ITMedia様の記事</a>にて紹介されました。
 </dd>
 <dt>2022/09/04<span>受賞</span></dt>
-<dd>Interverse Virtual Reality Challenge (IVRC) 2022 SEED stageにて，VR作品「MEcholocation」が「さくらインターネット賞」及び「Unity賞」を受賞しました。</dd>
+<dd>Interverse Virtual Reality Challenge (IVRC) 2022 SEED stageにて，「さくらインターネット賞」及び「Unity賞」を受賞しました。</dd>
 </dl>
 </dl>
 
@@ -88,50 +65,15 @@
 
 <section>
 
-<h2>模倣学習による自律走行の研究</h2>
-<h3>研究背景</h3>
-<p><strong class="color-theme">従来手法</strong><br>
-    現在主流となっている自律走行はパイプライン型です．<br>
-    パイプライン型とは，移動ロボットの操作量を計算する過程で複数のモジュールを段階的に用いる手法です．
-    この手法は，計算過程を確認することができるため説明性が高い一方で，システムが複雑になる傾向があります．
-    また，各モジュールが自律走行という大きなタスクを認識していないために不必要な計算を行ってしまいます．
-</p>
-<p><strong class="color-theme">End-to-End手法</strong><br>
-    ニューラルネットワークなどAIや計算マシンの進化によって，近年研究が行われているのがEnd-to-End手法です．<br>
-    End-to-Endとは，「端から端まで」という意味であり1つのモジュールで最終的な出力を行うように学習する手法です．
-    パイプライン型の自律走行よりも単純なシステムで実装でき，1つのモジュールの中で自律走行に必要な計算を行うため運転に不必要な情報を伝播することはありません．
-    一方で，計算過程はブラックボックス化されており可視化することが難しいため，説明性に乏しい傾向があります．
-    説明性の向上は，信頼性の向上にもつながるため盛んに研究されています．
-</p>
-<p><strong class="color-theme">模倣学習による自律走行</strong><br>
-    模倣学習はそんなEnd-to-End手法の一種です．<br>
-    模倣学習では，人間を1つのモジュールと定義しネットワークが人間の代わりとなるように学習します．
-    具体的には，まず人間の実演データを収集しデータセットとします．このデータセットでネットワークの学習を行います．
-    学習後のネットワークは人間を模倣し，代わりに運転を行うことができます．
-    私の研究はこの模倣学習による自律走行になります．
-</p>
-<h3>実験</h3>
-<h3>結果</h3>
-<p></p>
-<ul>
-<li></li>
-<li></li>
-</ul>
-
-</section>
-
-<section>
-
-<h2>MEcholocation</h2>
-<h3>作品概要</h3>
-<p><strong class="color-theme">エコロケーションとは？</strong><br>
-    イルカやコウモリが超音波の反響音を聞き，物体や獲物の位置を把握することはご存じでしょうか？
+<h2>作品概要</h2>
+<h3>エコロケーションとは？</h3>
+<p> イルカやコウモリが超音波の反響音を聞き，物体や獲物の位置を把握することはご存じでしょうか？
     このような空間認識法をエコロケーションと呼びます．このエコロケーションは実は人間でも可能なんです．
     視覚に障害がある方の中には，超音波の代わりに舌打ちの音や拍手の音でエコロケーションを行うことができる方がいらっしゃいます．
     部屋の形状を読み取ることはもちろんのこと，驚くべきことに手で物体に触れることなく複雑な物の形状を把握する方や自転車に乗りながらエコロケーションを行う方も！
 </p>
-<p><strong class="color-theme">作品の目的と概要</strong><br>
-    本作品の目的は人間のエコロケーションを誰でも体験することです．舌打ちの音をボールとして可視化して反射軌道を見ることで物体の位置を把握していただきます．
+<h3>作品の目的と概要</h3>
+<p> 本作品の目的は人間のエコロケーションを誰でも体験することです．舌打ちの音をボールとして可視化して反射軌道を見ることで物体の位置を把握していただきます．
     作品の実行場所をあらかじめLiDARセンサにより3Dスキャンすることによって，実際の部屋で体験を行うことが可能です．
 </p>
 <h4>aaaa</h4>
@@ -354,40 +296,22 @@ cssフォルダのstyle.css冒頭で読み込んでいる「Font Awesomeの読�
 <h2>リンク</h2>
 
 <table class="ta1">
-<caption>見出しが必要であればここを使います</caption>
-<tr>
-<th><a href="#"></a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-<tr>
-<th><a href="#">サイト名</a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-<tr>
-<th><a href="#">サイト名</a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-<tr>
-<th><a href="#">サイト名</a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-<tr>
-<th><a href="#">サイト名</a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-<tr>
-<th><a href="#">サイト名</a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-<tr>
-<th><a href="#">サイト名</a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-<tr>
-<th><a href="#">サイト名</a></th>
-<td>ここに説明など入れて下さい。サンプルテキスト。</td>
-</tr>
-</table>
+	<tr>
+	<th><a href="https://www.itmedia.co.jp/news/articles/2209/26/news049.html">ITMedia様の記事</a></th>
+	<td>IVRC2022 SEED stage終了後に紹介いただきました．</td>	</tr>
+	<tr>
+	<th><a href="https://note.com/unityjapan/n/n11dbbdebaf82">Unity様の記事</a></th>
+	<td>IVRC2022 LEAP stage終了後に取材いただきました．体験内容のほかに製作秘話なども紹介いただいてます．</td>
+	</tr>
+    <tr>
+    <th><a href="https://www.moguravr.com/xr-kaigi-2022-offline-report/">XRkaigiのレポート</a></th>
+    <td>XRkaigi 2022に出展した様子を，総括レポートの一部としてご紹介いただいた際の記事になります．</td>
+    </tr>
+	<tr>
+	<th><a href="https://conference.vrsj.org/ac2022/program/doc/1A3-12.pdf">VRSJにて掲載された論文</a></th>
+	<td>IVRC2022 予選時点での論文になります．本論文後に改良を行っておりますので，実際の内容とは異なる部分がございます．</td>
+	</tr>
+	</table>
 
 </section>
 
