@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>MEcholocation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="VR作品MEcholocationのホームページ">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+<header>
+
+<h1 id="logo"><img src="images/myImage/MEcholocation白.png" alt="MEcholocation"></h1>
+
+<div id="menubar_hdr">
+<span></span><span></span><span></span>
+</div>
+<!--/#menubar_hdr-->
+
+<div id="header-icon">
+<a href="https://twitter.com/sakukuri2019"><i class="fab fa-twitter"></i></a>
+</div>
+<!--/#header-icon-->
+</header>
+
+<main>
+
+<section>
+    <h2>説明動画</h2>
+    <iframe width="630" height="315" src="https://www.youtube.com/embed/gIN6iEHPH8M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <h2>作品概要</h2>
+    <h3>エコロケーションとは？</h3>
+    <p> エコロケーションとは音の反響を頼りに物の位置や形を認識する能力のことで、一般的にはコウモリやイルカなど一部の動物が持っていることで知られています．<br>
+        驚くべきことに、世の中にはエコロケーションの能力を会得した人がいます．
+        例えば，ダニエル・キッシュ氏は視覚に障害があるにも関わらず，助けを借りることなく歩いたり自転車に乗ったりできます．
+        人間の可能性の1つとして素晴らしいことですが，このような事実はあまり知られていません．
+    </p>
+    <h3>作品の目的</h3>
+    <p>エコロケーションをあくまでエンターテインメントとして疑似体験していただき知っていただくことが本作品の目的です．<br>
+        MEcholocation は「見えない」という一見するとネガティブな体験を、見えない“のに“歩けた、座れた，触れた。そんな不思議で夢中になれるものへと昇華させたいという思いで製作しました．
+    </p>
+    <h3>体験の準備と流れ</h3>
+    <p>体験の準備はまず，iPhone13Proに搭載のLiDARセンサで体験する部屋を3Dスキャンするところから始まります．次にスキャンしたモデルをBlenderで修正，Unityに導入してMetaQuest2にビルドします．
+        ビルドしたアプリケーションをQuest2上で開き，現実世界と位置合わせを行ったら準備完了です．<br>
+        体験時には，体験者の声をQuest2内蔵のマイクで拾い舌打ちを検知します．舌打ち音を検知したら音に見立てた弾を発射します．
+        弾は位置合わせされたモデルに反射するため物の位置を把握することができます．<br>
+        体験の前半は，現実世界の輪郭が見える状態で練習を行えます．この際，現実世界はQuest2のパススルーカメラごしに見ることができます．
+        体験場所のどこかにある赤いボタンを手で押すと現実世界の輪郭は消え真っ暗になります．
+    </p>
+    <figure><img src="images/myImage/システム.png" alt=""></figure>
+    <h3>LiDARセンサについて</h3>
+    <p>LiDAR センサは光の反射を元に物体までの距離を測定するセンサです。自動車の後方検知システムなどにも用いられてきました。
+        iPhone12Pro からは一部の機種の iPhone にも搭載されています。今回は AppStore にて配信されているアプリ 3DscannerApp を用いて iPhone で部屋を 3D スキャンしました。
+        このように、スキャンした場所ならばどこでも体験場所にできるのがMEcholocationの強みです。
+        また、より高精度かつ遠距離まで対応したLiDAR センサがあれば、巨大なフィールドで体験することも可能となります。
+    </p>
+    <figure><center><img src="images/myImage/LiDAR.jpg" alt=""></center></figure>
+    <h3>舌打ちの検知</h3>
+    <p>本作品では舌打ち音の検知はマルチレイヤ―パーセプトロン(MLP)を用いました．
+        MLPはニューラルネットワークであり，誤差逆伝播法を用いて機械学習を行うことができます．<br>
+        モデルへの入力は、音量の分散、周波数の最大値に加えて音量、周波数それぞれの 1024 個の値を16 個のデータに圧縮し用いました。
+        さらに、１つ前のデータも用いたため合計 68 個の値を入力しています。（68 次元）
+        隠れ層は 128 個、出力層は、舌打ち、拍手、舌鼓、それ以外の計 4 個のユニットで構成されています。<br>
+        学習には 37,851 個のデータを用いました。これは、製作メンバーを含めた岐阜大学生 10 人程度から集めたものです。
+        学習途中、大きな声を短く出すと舌打ちとして検知されてしまうことが分かったため、これらの音を学習データに加えながら学習を行いました。<br>
+        学習した結果、精度は大きく向上しました。MLPは SEED Stage 時の設定と比較して、誤検出データは 624 個から37 個まで減少しました。
+    </p>
+    <h3>ハンドトラッキングとパススルー</h3>
+    <p>ハンドトラッキングとは、手や手のポーズを測定する技術です。Meta 社のハンドトラッキングAPI は 2020 年 12 月に実装されました。
+        Meta 社製の特徴として、トラッカーを必要とせず画像処理のみでハンドトラッキングが行える点が挙げられます．<br>
+        内蔵カメラから外の画像を VR 内に出力する技術をパススルーと言います。 安全のために使われることが多いですが、我々はこれを体験の一部に活用しました。
+        Meta 社製のパススルー API は 2021 年 11 月に実装されたものです。<br>
+        このように，MEcholocationはリリースされたばかりのAPIを利用して製作しました．
+    </p>
+    <figure><center><img src="images/myImage/ハンドトラッキング.jpg" alt=""><img src="images/myImage/パススルー.jpg" alt=""></center></figure>
+    <h2>謝辞</h2>
+    
+    <p>謝辞の前にまず，MEcholocationがどのように生まれたのかを語らせてください．
+        MEcholocationは，そもそも岐阜大学の実験の授業のために製作された作品です．
+        メンバーは6人．仲良しグループで製作することになりました．
+        この授業では，「どんなに小さな分野でもいいから世界一のものを作れ」といわれ，3週間にわたりアイデアを考えた結果生まれたのが「エコロケーション体験」です．<br>
+        完成した作品に対して授業内の投票では，同コースの生徒による投票で過半数以上の票をいただきました．
+        そして，コンテストに出そうという話になり，チームのうち3人でIVRCに応募しました．<br>
+        ここからは本当に驚きの連続で多くの方に評価していただき，ついにはフランスでは研究部門で大賞をいただきました。
+        このような経緯から，感謝しなければならない方がたくさんいらっしゃいますのでここに記します．
+    </p>
+    <p><strong class="color-theme">木島竜吾准教授</strong><br>
+        授業の担当教員で小木曽君の指導教員です．授業のころからアドバイスを多くいただきました．IVRCやLavalへの応募を薦めてくださったのも木島先生でした．心から感謝申し上げます．
+    </p>
+    <p><strong class="color-theme">白井暁彦様</strong><br>
+        Laval Virtualへの応募の際にサポートしていただきました．作品についても高く評価していただき，フランスに行く決意が出来ました．心から感謝申し上げます．
+    </p>
+    <p><strong class="color-theme">森君，脇田君，大河内君</strong><br>
+        授業時の開発メンバーです．原案を出したのが森君，MEcholocationという名前の命名者が脇田君です．
+        3人ともBlenderでのモデリングを1から学んで，手伝ってくれました．心から感謝申し上げます．
+    </p>
+    <p><strong class="color-theme">プレイしてくださった方，Twitter等で興味を持ってくださった方</strong><br>
+        様々なアドバイスやお褒めの言葉をいただきました．Twitterでも本当に多くの反響をいただき勇気が出ました．
+        心から感謝申し上げます．
+    </p>
+
+</section>
+
+</main>
+
+<div id="menubar">
+
+<!--メインメニュー-->
+<nav>
+    <ul>
+    <li class="current"><a href="index.html">HOME</a></li>
+    <li><a href="works.html">WORK</a></li>
+    <li><a href="contact.html">CONTACT</a></li>
+    </ul>
+    </nav>
+    
+    </div>
+    <!--/#menubar-->
+    
+    <footer>
+    <small>Copyright&copy; <a href="index.html">SAMPLE COMPANY</a> All Rights Reserved.</small>
+    <span class="pr"><a href="https://template-party.com/" target="_blank">《Web Design:Template-Party》</a></span>
+    </footer>
+    
+    </div>
+    <!--/#container-->
+    
+    <!--jQueryの読み込み-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+    <!--このテンプレート専用のスクリプト-->
+    <script src="js/main.js"></script>
+    
+    <!--ページの上部へ戻るボタン-->
+    <div class="pagetop"><a href="#"><i class="fas fa-angle-double-up"></i></a></div>
+    
+    </body>
+    </html>
